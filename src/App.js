@@ -15,7 +15,8 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: '',
-      box: {}
+      box: {},
+      route: 'signin'
     };
   }
 
@@ -96,21 +97,38 @@ class App extends Component {
         .catch(error => console.log('error', error));
     
   }
+
+  onRouteChange = (route) => {
+     
+    if (route === 'signin'){
+      if(window.confirm('¿Estás seguro que quieres salir?')){
+        this.setState({route: 'signin'});
+      }
+    }else{
+      this.setState({route: 'home'});
+    }
+ 
+  }
+
   render(){
     return (
       <div className="App">
-        <Signin />
-        {/*
-        <ParticlesBg className="particles" color="#ff0000" num={100} type="cobweb" bg={true} />
-        <Navigation />
-        <Logo />
-        <Rank />
-        <ImageLinkForm 
-          onButtonSubmit={this.onButtonSubmit} 
-          onInputChange={this.onInputChange}
-          />
-        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>*/}
-    </div>
+  	    <ParticlesBg className="particles" color="#FFFFFF" num={100} type="cobweb" bg={true} />
+        {this.state.route === 'signin' ?
+          <Signin onRouteChange={this.onRouteChange}/>
+          :
+          <>
+            <Navigation goHome={this.onRouteChange}/>
+            <Logo />
+            <Rank />
+            <ImageLinkForm 
+              onButtonSubmit={this.onButtonSubmit} 
+              onInputChange={this.onInputChange}
+              />
+            <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
+          </>
+        }    
+      </div>
     );
   }
 }
