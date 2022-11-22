@@ -9,24 +9,26 @@ import { Component } from 'react';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 
+const initialState = {
+  input: '',
+  imageUrl: '',
+  box: {},
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: '' 
+  }
+}
 
 class App extends Component {
+  
   constructor() {
     super();
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box: {},
-      route: 'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: '' 
-      }
-    };
+    this.state = initialState;
   }
 
   loadUser = (data) => {
@@ -135,6 +137,9 @@ class App extends Component {
     this.setState({isSignedIn: false})
     if(ruta === 'home'){
       this.setState({isSignedIn: true})
+    }
+    if(ruta === 'signin'){
+      this.setState(initialState);
     }
     this.setState({route : ruta})
   }

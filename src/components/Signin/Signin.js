@@ -46,8 +46,8 @@ class Signin extends React.Component{
                                 <input 
                                 className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                 type="email" 
-                                name="email-address"  
-                                id="email-address"
+                                name="email"  
+                                id="email"
                                 onChange={this.onEmailChange}
                                 />
                             </div>
